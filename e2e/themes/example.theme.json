@@ -1,0 +1,12 @@
+{
+  "$schema": "../../themes/theme.schema.json",
+  "name": "Example",
+  "logo": {
+    "src": "assets/logo.svg",
+    "srcDark": "assets/logo-dark.svg",
+    "alt": "Example Shop",
+    "height": 28
+  },
+  "light": { "header-bg": "#1f3a5f", "accent": "#1f6feb" },
+  "dark": { "header-bg": "#0d1b2e", "accent": "#58a6ff" }
+}

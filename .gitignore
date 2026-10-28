@@ -1,0 +1,6 @@
+node_modules/
+dist/
+*.tgz
+e2e/output/
+.pack-check/
+.DS_Store

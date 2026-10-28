@@ -1,0 +1,385 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "living-docs theme",
+  "description": "Colours for light and dark mode, and a logo, for the living-docs report. The reporter checks the file again when the run starts, including that the logo files exist.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "The JSON Schema an editor checks this file against."
+    },
+    "name": {
+      "type": "string",
+      "description": "The theme’s name."
+    },
+    "description": {
+      "type": "string",
+      "description": "What the theme is for."
+    },
+    "extends": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The theme to start from: a name (`brand` finds `brand.theme.json`) or a path, relative to this file. Default `default`."
+    },
+    "logo": {
+      "type": ["object", "null"],
+      "description": "Shown in the top left of the header. `null` removes a logo the theme would inherit.",
+      "additionalProperties": false,
+      "required": ["src", "alt"],
+      "properties": {
+        "src": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The image, relative to this file, up to 1 MB. It is embedded in the page.",
+          "pattern": "\\.([sS][vV][gG]|[pP][nN][gG]|[jJ][pP][gG]|[jJ][pP][eE][gG]|[wW][eE][bB][pP]|[gG][iI][fF])$",
+          "patternErrorMessage": "An .svg, .png, .jpg, .jpeg, .webp or .gif file"
+        },
+        "srcDark": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A different image for dark mode, relative to this file, up to 1 MB.",
+          "pattern": "\\.([sS][vV][gG]|[pP][nN][gG]|[jJ][pP][gG]|[jJ][pP][eE][gG]|[wW][eE][bB][pP]|[gG][iI][fF])$",
+          "patternErrorMessage": "An .svg, .png, .jpg, .jpeg, .webp or .gif file"
+        },
+        "alt": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "The text a screen reader announces, usually the organisation’s name."
+        },
+        "height": {
+          "type": "number",
+          "minimum": 16,
+          "maximum": 80,
+          "description": "Display height in pixels. Default 32."
+        }
+      }
+    },
+    "light": {
+      "type": "object",
+      "description": "Colours for light mode. List only the ones this theme changes; the rest come from the theme it extends.",
+      "additionalProperties": false,
+      "properties": {
+        "bg": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Page background."
+        },
+        "surface": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Card background."
+        },
+        "surface-2": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Hover and muted panels."
+        },
+        "border": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Lines and card borders."
+        },
+        "text": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Main text."
+        },
+        "text-2": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Secondary text."
+        },
+        "accent": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Links, pressed filter buttons and step badges."
+        },
+        "on-accent": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Text on accent."
+        },
+        "highlight": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Active tab and nav markers, and the narrative bar."
+        },
+        "focus": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Keyboard focus outline."
+        },
+        "header-bg": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "The top bar. The logo sits on it."
+        },
+        "header-text": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Text in the top bar."
+        },
+        "header-hover": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Hovered links in the top bar."
+        },
+        "passed": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Passed status: icons, badges and charts."
+        },
+        "failed": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Failed status: icons, badges and charts."
+        },
+        "flaky": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Flaky status: icons, badges and charts."
+        },
+        "skipped": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Skipped status: icons, badges and charts."
+        },
+        "on-status": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "The glyph on a status icon."
+        },
+        "passed-soft": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Passed badge background."
+        },
+        "failed-soft": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Failed badge and error backgrounds."
+        },
+        "flaky-soft": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Flaky badge background."
+        },
+        "skipped-soft": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Skipped badge background."
+        },
+        "code-bg": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Code and body panels."
+        },
+        "api": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Test API call badges and HTTP methods."
+        },
+        "browser": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Browser API call badges and their panel."
+        },
+        "shadow": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Card shadow. `none` removes it."
+        }
+      }
+    },
+    "dark": {
+      "type": "object",
+      "description": "Colours for dark mode. List only the ones this theme changes; the rest come from the theme it extends.",
+      "additionalProperties": false,
+      "properties": {
+        "bg": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Page background."
+        },
+        "surface": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Card background."
+        },
+        "surface-2": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Hover and muted panels."
+        },
+        "border": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Lines and card borders."
+        },
+        "text": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Main text."
+        },
+        "text-2": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Secondary text."
+        },
+        "accent": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Links, pressed filter buttons and step badges."
+        },
+        "on-accent": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Text on accent."
+        },
+        "highlight": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Active tab and nav markers, and the narrative bar."
+        },
+        "focus": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Keyboard focus outline."
+        },
+        "header-bg": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "The top bar. The logo sits on it."
+        },
+        "header-text": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Text in the top bar."
+        },
+        "header-hover": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Hovered links in the top bar."
+        },
+        "passed": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Passed status: icons, badges and charts."
+        },
+        "failed": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Failed status: icons, badges and charts."
+        },
+        "flaky": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Flaky status: icons, badges and charts."
+        },
+        "skipped": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Skipped status: icons, badges and charts."
+        },
+        "on-status": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "The glyph on a status icon."
+        },
+        "passed-soft": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Passed badge background."
+        },
+        "failed-soft": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Failed badge and error backgrounds."
+        },
+        "flaky-soft": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Flaky badge background."
+        },
+        "skipped-soft": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Skipped badge background."
+        },
+        "code-bg": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Code and body panels."
+        },
+        "api": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Test API call badges and HTTP methods."
+        },
+        "browser": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Browser API call badges and their panel."
+        },
+        "shadow": {
+          "type": "string",
+          "pattern": "^[#\\w\\s.,%()-]+$",
+          "patternErrorMessage": "A CSS colour (or shadow) without ; { } or <",
+          "description": "Card shadow. `none` removes it."
+        }
+      }
+    }
+  }
+}

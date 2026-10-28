@@ -1,0 +1,75 @@
+{
+  "name": "@fullstacktester/living-docs",
+  "version": "0.1.0",
+  "description": "A Playwright reporter that writes living documentation: a self-contained HTML report with levels and features, nested steps, narratives and every API call's request and response.",
+  "keywords": [
+    "playwright",
+    "reporter",
+    "living-documentation",
+    "serenity",
+    "test-report",
+    "api-testing"
+  ],
+  "license": "MIT",
+  "author": "Tom Binns",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fullstacktester/living-docs.git"
+  },
+  "homepage": "https://github.com/fullstacktester/living-docs#readme",
+  "bugs": "https://github.com/fullstacktester/living-docs/issues",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./annotations": {
+      "types": "./dist/annotations.d.ts",
+      "import": "./dist/annotations.js",
+      "default": "./dist/annotations.js"
+    },
+    "./record": {
+      "types": "./dist/record/index.d.ts",
+      "import": "./dist/record/index.js",
+      "default": "./dist/record/index.js"
+    },
+    "./themes/*": "./themes/*",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "living-docs": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "themes",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/clean.mjs && tsc -p tsconfig.build.json && node scripts/copy-client.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "npm run build && node e2e/run.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "pack:check": "node scripts/pack-check.mjs",
+    "prepublishOnly": "npm run typecheck && npm test && npm run test:e2e"
+  },
+  "peerDependencies": {
+    "@playwright/test": ">=1.53.0 <2"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.0",
+    "@types/node": "24.19.2",
+    "prettier": "3.9.10",
+    "typescript": "5.9.3",
+    "vitest": "5.0.3"
+  }
+}

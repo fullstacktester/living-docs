@@ -1,0 +1,6 @@
+dist/
+node_modules/
+e2e/output/
+.pack-check/
+package-lock.json
+CHANGELOG.md

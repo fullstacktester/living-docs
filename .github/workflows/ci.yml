@@ -1,0 +1,48 @@
+name: CI
+
+# Runs on every pull request to main, and again from release.yml on each merge
+# to main, before anything is published.
+on:
+  pull_request:
+    branches: [main]
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22, 24]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run typecheck
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - run: npm run pack:check
+
+  # The oldest Playwright the peer range claims. The pack check runs the
+  # installed package in a fresh project, with no browser, and checks the
+  # report's step tree, which breaks when Playwright names steps differently.
+  oldest-playwright:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run pack:check
+        env:
+          PLAYWRIGHT_VERSION: 1.53.0
