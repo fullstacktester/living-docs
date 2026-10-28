@@ -326,7 +326,13 @@ Layout:
 - `src/annotations.ts`: `about()`.
 - `src/serve.ts` and `src/cli.ts`: `living-docs serve`.
 
-Releases: in a pull request, bump `version` and add a `CHANGELOG.md` entry. On merge to main, the release workflow runs every check again, then publishes the version to npm and tags the commit `v<version>`. A merge that leaves `version` as it is publishes nothing.
+### Releases
+
+`main` only changes through pull requests, and a pull request can only merge once CI passes: the checks on Node 20, 22 and 24, and the check on the oldest supported Playwright.
+
+To release, bump `version` in `package.json` and add a `CHANGELOG.md` entry in a pull request. On merge, the release workflow (`.github/workflows/release.yml`) runs every check again, then publishes the version to npm and tags the commit `v<version>`. A merge that leaves `version` as it is publishes nothing.
+
+Publishing uses npm trusted publishing (OIDC), so there is no npm token. The package's trusted publisher on npmjs.com names the GitHub user `fullstacktester`, the repository `living-docs` and the workflow `release.yml`, and allows `npm publish`. Token publishing is disallowed in the package's publishing access settings. Provenance is added automatically.
 
 ## Licence
 
